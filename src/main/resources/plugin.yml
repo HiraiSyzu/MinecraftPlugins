@@ -1,0 +1,14 @@
+name: Minecraft_Plugin
+version: '${version}'
+
+main: me.PluginHirai.minecraft_Plugin.Minecraft_Plugin
+api-version: '1.21'
+load: POSTWORLD
+
+commands:
+  greet:
+    description: Hirai Minecraft plugin
+  heal:
+    description: Heals a player
+  damage:
+    description: Damages a player
