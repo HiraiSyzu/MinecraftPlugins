@@ -1,10 +1,11 @@
-package me.PluginHirai.minecraft_Plugin;
+package me.pluginhirai.minecraft_Plugin;
 
-import me.PluginHirai.minecraft_Plugin.commands.DamageCommand;
-import me.PluginHirai.minecraft_Plugin.commands.GreetCommand;
-import me.PluginHirai.minecraft_Plugin.commands.HealCommand;
-import me.PluginHirai.minecraft_Plugin.listener.JoinListener;
-import me.PluginHirai.minecraft_Plugin.listener.QuitListener;
+import me.pluginhirai.minecraft_Plugin.commands.DamageCommand;
+import me.pluginhirai.minecraft_Plugin.commands.GreetCommand;
+import me.pluginhirai.minecraft_Plugin.commands.HealCommand;
+import me.pluginhirai.minecraft_Plugin.randomteleport.command.RandomTeleportCommand;
+import me.pluginhirai.minecraft_Plugin.listener.JoinListener;
+import me.pluginhirai.minecraft_Plugin.listener.QuitListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Minecraft_Plugin extends JavaPlugin {
@@ -22,7 +23,8 @@ public final class Minecraft_Plugin extends JavaPlugin {
         getCommand("heal").setExecutor(new HealCommand());
         // Damage Command
         getCommand("damage").setExecutor(new DamageCommand());
-
+        // Rtp Command
+        getCommand("Rtp").setExecutor(new RandomTeleportCommand());
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new QuitListener(), this);
         getLogger().info("Plugin Enabled");
