@@ -1,4 +1,5 @@
 package me.pluginhirai.minecraft_Plugin.randomteleport.command;
+import me.pluginhirai.minecraft_Plugin.Minecraft_Plugin;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -13,6 +14,12 @@ import java.util.EnumSet;
 
 public class RandomTeleportCommand implements CommandExecutor {
     private static final int MAX_RADIUS = 5000;
+    private final Minecraft_Plugin plugin;
+
+    // Constructor
+    public RandomTeleportCommand(Minecraft_Plugin plugin) {
+        this.plugin = plugin;
+    }
     private static final EnumSet<Material> UNSAFE_GROUND_MATERIALS = EnumSet.of(
             // List of Unsafe materials
             Material.WATER,
@@ -36,7 +43,7 @@ public class RandomTeleportCommand implements CommandExecutor {
                 // Location Safety Checker
                 if (isLocationSafe(groundBlock)) {
                     Location locationTeleport = createTeleportLocation(groundBlock);
-                    player.teleport(locationTeleport); // if Location is safe -  teleport the player
+                    player.teleportAsync(locationTeleport); // if Location is safe -  teleport the player
                     safeLocation = true; // if true set safeLocation true
                 }
                 /* Debug
@@ -70,9 +77,11 @@ public class RandomTeleportCommand implements CommandExecutor {
         return groundBlock.getLocation().add(0.5, 1, 0.5);
     }
     private Block getRandomGroundBlock(World world) {
-        int x = ThreadLocalRandom.current().nextInt(-MAX_RADIUS, MAX_RADIUS); // Set x cords to -5000 by 5000 blocks
+        int maxRadius = plugin.getConfig().getInt("max-radius"); // Get the max-radius value in plugin.yml
+
+        int x = ThreadLocalRandom.current().nextInt(-maxRadius, maxRadius); // Set x cords to -5000 by 5000 blocks
         // z cords
-        int z = ThreadLocalRandom.current().nextInt(-MAX_RADIUS, MAX_RADIUS); // Set z cords by -5000 by 5000 blocks
+        int z = ThreadLocalRandom.current().nextInt(-maxRadius, maxRadius); // Set z cords by -5000 by 5000 blocks
         return world.getHighestBlockAt(x, z);
     }
 }

@@ -1,7 +1,7 @@
 name: Minecraft_Plugin
 version: '${version}'
 
-main: me.PluginHirai.minecraft_Plugin.Minecraft_Plugin
+main: me.pluginhirai.minecraft_Plugin.Minecraft_Plugin
 api-version: '1.21'
 load: POSTWORLD
 
@@ -11,4 +11,8 @@ commands:
   heal:
     description: Heals a player
   damage:
+
     description: Damages a player
+  rtp:
+    max-radius: 5000 # Cords Radius +-5000 blocks
+    description: Teleport a player into random location

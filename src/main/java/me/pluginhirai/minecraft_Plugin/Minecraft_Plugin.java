@@ -24,7 +24,8 @@ public final class Minecraft_Plugin extends JavaPlugin {
         // Damage Command
         getCommand("damage").setExecutor(new DamageCommand());
         // Rtp Command
-        getCommand("Rtp").setExecutor(new RandomTeleportCommand());
+        getCommand("Rtp").setExecutor(new RandomTeleportCommand(this));
+
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new QuitListener(), this);
         getLogger().info("Plugin Enabled");
