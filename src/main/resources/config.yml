@@ -1,0 +1,13 @@
+max-radius: 5000 # +-5000 blocks tp radius
+messages:
+  success: "<#00FFFF>Successfully teleported to a random location!" #Success Message
+  cooldown: "You must wait <#00FFFF>%remaining_time%s</#00FFFF> before using /rtp again!" #Cooldown-message rtp
+  no_safe_location: ""
+cooldown-seconds: 20 # Rtp cooldown (Sec)
+UNSAFE_MATERIALS:
+  - WATER
+  - AIR
+  - LAVA
+  - CACTUS
+  - POWDER_SNOW
+

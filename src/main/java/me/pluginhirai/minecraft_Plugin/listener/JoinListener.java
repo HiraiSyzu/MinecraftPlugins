@@ -1,4 +1,4 @@
-package me.PluginHirai.minecraft_Plugin.listener;
+package me.pluginhirai.minecraft_Plugin.listener;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;

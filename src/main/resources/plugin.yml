@@ -7,12 +7,10 @@ load: POSTWORLD
 
 commands:
   greet:
-    description: Hirai Minecraft plugin
+    description: Hirai Minecraft plugin.
   heal:
-    description: Heals a player
+    description: Heals a player.
   damage:
-
-    description: Damages a player
+    description: Damages a player.
   rtp:
-    max-radius: 5000 # Cords Radius +-5000 blocks
-    description: Teleport a player into random location
+    description: Teleport a player into random location.

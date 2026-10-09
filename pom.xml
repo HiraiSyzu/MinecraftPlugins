@@ -60,7 +60,7 @@
                         <configuration>
                             <target>
                                 <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                      tofile="C:/Users/boncodin/Downloads/Documents/Desktop/Minecraft Server/plugins/${project.build.finalName}.jar" />
+                                      tofile="${user.home}/Servers/Paper/plugins/${project.build.finalName}.jar"/>
                             </target>
                         </configuration>
                     </execution>

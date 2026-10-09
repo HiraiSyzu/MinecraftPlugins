@@ -17,6 +17,7 @@ public final class Minecraft_Plugin extends JavaPlugin {
         getLogger().info("MINECRAFT_PLUGIN HAS STARTED!");
         getLogger().info("=================================");
 
+
         // Greet Command
         getCommand("greet").setExecutor(new GreetCommand());
         // Heal Command
@@ -24,6 +25,7 @@ public final class Minecraft_Plugin extends JavaPlugin {
         // Damage Command
         getCommand("damage").setExecutor(new DamageCommand());
         // Rtp Command
+        saveDefaultConfig();
         getCommand("Rtp").setExecutor(new RandomTeleportCommand(this));
 
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
