@@ -14,3 +14,10 @@ commands:
     description: Damages a player.
   rtp:
     description: Teleport a player into random location.
+permissions:
+  minecraft_plugin.rtp:
+    description: Allow use of /rtp
+    default: true
+  minecraft_plugin.rtp.bypass-cooldown:
+    description: Bypass Rtp Cooldown
+    default: false

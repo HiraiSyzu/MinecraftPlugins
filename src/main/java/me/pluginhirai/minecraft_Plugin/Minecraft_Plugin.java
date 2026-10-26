@@ -6,10 +6,11 @@ import me.pluginhirai.minecraft_Plugin.commands.HealCommand;
 import me.pluginhirai.minecraft_Plugin.randomteleport.command.RandomTeleportCommand;
 import me.pluginhirai.minecraft_Plugin.listener.JoinListener;
 import me.pluginhirai.minecraft_Plugin.listener.QuitListener;
+import me.pluginhirai.minecraft_Plugin.randomteleport.listener.RtpMoveListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Minecraft_Plugin extends JavaPlugin {
 
+public final class Minecraft_Plugin extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -26,8 +27,10 @@ public final class Minecraft_Plugin extends JavaPlugin {
         getCommand("damage").setExecutor(new DamageCommand());
         // Rtp Command
         saveDefaultConfig();
-        getCommand("Rtp").setExecutor(new RandomTeleportCommand(this));
+        RandomTeleportCommand rtpCommand = new RandomTeleportCommand(this);
+        getCommand("Rtp").setExecutor(rtpCommand);
 
+        getServer().getPluginManager().registerEvents(new RtpMoveListener(rtpCommand), this);
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new QuitListener(), this);
         getLogger().info("Plugin Enabled");
