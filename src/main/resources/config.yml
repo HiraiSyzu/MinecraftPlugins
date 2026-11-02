@@ -1,3 +1,19 @@
+rtp-worlds:
+  NORMAL:
+    max-radius: 5000
+    min-y: 60
+    max-y: 320
+
+  NETHER:
+    max-radius: 3000
+    min-y: 60
+    max-y: 120
+
+  THE_END:
+    max-radius: 4000
+    min-y: 50
+    max-y: 120
+
 max-radius: 5000 # +-5000 blocks tp radius
 max-attempts: 50 # rtp logic attempts
 messages:

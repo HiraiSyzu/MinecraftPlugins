@@ -1,12 +1,11 @@
 package me.pluginhirai.minecraft_Plugin.randomteleport.config;
 
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.EnumSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RtpSettings {
@@ -27,6 +26,7 @@ public class RtpSettings {
     private final String noPermissionMessage;
     private final String playerCancelMovementTeleportMessage;
     private final String pendingTeleportMessage;
+    private final Map<World.Environment, WorldRtpSettings> worldRtpSettings;
 
     public RtpSettings(JavaPlugin plugin) {
         FileConfiguration config = plugin.getConfig();
@@ -50,6 +50,29 @@ public class RtpSettings {
         this.noPermissionMessage = config.getString("no-permission");
         this.playerCancelMovementTeleportMessage = config.getString("messages.canceled-movement-teleport-message");
         this.pendingTeleportMessage = config.getString("messages.pending-teleport-message");
+        this.worldRtpSettings = new EnumMap<>(World.Environment.class);
+
+        // for overworld
+        worldRtpSettings.put(World.Environment.NORMAL, new WorldRtpSettings
+                (config.getInt("rtp-worlds.NORMAL.max-radius"),
+                        config.getInt("rtp-worlds.NORMAL.min-y"),
+                        config.getInt("rtp-worlds.NORMAL.max-y")
+                )
+        );
+        // for nether
+        worldRtpSettings.put(World.Environment.NETHER, new WorldRtpSettings
+                (config.getInt("rtp-worlds.NETHER.max-radius"),
+                        config.getInt("rtp-worlds.NETHER.min-y"),
+                        config.getInt("rtp-worlds.NETHER.max-y")
+                )
+        );
+        // for end
+        worldRtpSettings.put(World.Environment.THE_END, new WorldRtpSettings
+                (config.getInt("rtp-worlds.THE_END.max-radius"),
+                        config.getInt("rtp-worlds.THE_END.min-y"),
+                        config.getInt("rtp-worlds.THE_END.max-y")
+                )
+        );
     }
     // Getters for configs
     public int getCooldownSeconds() {
@@ -103,5 +126,9 @@ public class RtpSettings {
     }
     public String getPendingTeleportMessage() {
         return pendingTeleportMessage;
+    }
+
+    public WorldRtpSettings getWorldSettings(World.Environment environment) {
+        return worldRtpSettings.get(environment);
     }
 }

@@ -12,6 +12,7 @@ import me.pluginhirai.minecraft_Plugin.randomteleport.effect.RandomTeleportEffec
 import me.pluginhirai.minecraft_Plugin.randomteleport.listener.RtpMoveListener;
 import me.pluginhirai.minecraft_Plugin.randomteleport.listener.RtpQuitListener;
 import me.pluginhirai.minecraft_Plugin.randomteleport.location.LocationFinder;
+import me.pluginhirai.minecraft_Plugin.randomteleport.location.OverworldStrategy;
 import me.pluginhirai.minecraft_Plugin.randomteleport.location.SafetyChecker;
 import me.pluginhirai.minecraft_Plugin.randomteleport.service.RandomTeleportService;
 import me.pluginhirai.minecraft_Plugin.randomteleport.warmup.WarmupManager;
@@ -40,17 +41,17 @@ public final class Minecraft_Plugin extends JavaPlugin {
         saveDefaultConfig();
         RtpSettings settings = new RtpSettings(this);
         SafetyChecker safetyChecker = new SafetyChecker(settings);
-        LocationFinder locationFinder = new LocationFinder(this, settings, safetyChecker);
+        OverworldStrategy overworldStrategy = new OverworldStrategy(this);
+        LocationFinder locationFinder = new LocationFinder(settings, safetyChecker, overworldStrategy);
         CooldownManager cooldownManager = new CooldownManager(settings);
         RandomTeleportEffects rtpEffects = new RandomTeleportEffects(settings);
         this.warmupManager = new WarmupManager(this, settings, rtpEffects);
-        WarmupManager warmupManager = new WarmupManager(this, settings, rtpEffects);
         RandomTeleportService rtpService = new RandomTeleportService(
                 settings,locationFinder,
                 warmupManager, cooldownManager,
                 rtpEffects);
         RandomTeleportCommand rtpCommand = new RandomTeleportCommand(rtpService, settings);
-        getCommand("Rtp").setExecutor(rtpCommand);
+        getCommand("rtp").setExecutor(rtpCommand);
         getServer().getPluginManager().registerEvents(new RtpMoveListener(warmupManager, rtpService), this);
         getServer().getPluginManager().registerEvents(new RtpQuitListener(warmupManager), this);
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
