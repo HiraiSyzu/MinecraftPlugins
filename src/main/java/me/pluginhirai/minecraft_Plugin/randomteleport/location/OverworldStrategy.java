@@ -11,10 +11,12 @@ public class OverworldStrategy implements GroundStrategy {
     public OverworldStrategy(Minecraft_Plugin plugin) {
         this.plugin = plugin;
     }
+    @Override
     public CompletableFuture<Optional<Block>> findGroundBlock(World world, int x, int z) {
         // Debug
         // plugin.getLogger().info("Debug Max is currently: " + maxRadius);
-        return world.getChunkAtAsync(x >> 4, z >> 4).thenApplyAsync(ignored -> Optional.of(world.getHighestBlockAt(x, z)),
+        return world.getChunkAtAsync(x >> 4, z >> 4).thenApplyAsync(ignored ->
+                        Optional.of(world.getHighestBlockAt(x, z)),
                 Bukkit.getScheduler().getMainThreadExecutor(plugin));
     }
 }

@@ -6,6 +6,7 @@ import me.pluginhirai.minecraft_Plugin.randomteleport.location.LocationFinder;
 import me.pluginhirai.minecraft_Plugin.randomteleport.warmup.WarmupManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class RandomTeleportService {
         this.cooldownManager = cooldownManager;
         this.rtpEffects = rtpEffects;
     }
-    public void requestTeleport(Player player) {
+    public void requestTeleport(Player player, World world) {
         UUID uuid = player.getUniqueId();
         if (warmupManager.isPending(uuid)) {
             sendMessage(player, settings.getPendingTeleportMessage());

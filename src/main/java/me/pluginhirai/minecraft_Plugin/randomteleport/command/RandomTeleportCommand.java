@@ -25,7 +25,7 @@
                 player.sendMessage(MiniMessage.miniMessage().deserialize(settings.getNoPermissionMessage()));
                 return true;
             }
-            rtpService.requestTeleport(player);
+            rtpService.requestTeleport(player, player.getWorld());
             return true;
         }
     }

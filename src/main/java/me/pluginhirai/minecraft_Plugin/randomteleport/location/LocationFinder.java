@@ -1,6 +1,4 @@
 package me.pluginhirai.minecraft_Plugin.randomteleport.location;
-
-import me.pluginhirai.minecraft_Plugin.Minecraft_Plugin;
 import me.pluginhirai.minecraft_Plugin.randomteleport.config.RtpSettings;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -14,10 +12,14 @@ public class LocationFinder {
     private final RtpSettings settings;
     private final SafetyChecker safetyChecker;
     private final OverworldStrategy overworldStrategy;
-    public LocationFinder(RtpSettings settings, SafetyChecker safetyChecker, OverworldStrategy overworldStrategy) {
+    private final NetherStrategy netherStrategy;
+    private final EndStrategy endStrategy;
+    public LocationFinder(RtpSettings settings, SafetyChecker safetyChecker, OverworldStrategy overworldStrategy, NetherStrategy netherStrategy, EndStrategy endStrategy) {
         this.settings = settings;
         this.safetyChecker = safetyChecker;
         this.overworldStrategy = overworldStrategy;
+        this.netherStrategy = netherStrategy;
+        this.endStrategy = endStrategy;
     }
     private Location createTeleportLocation(Block groundBlock) {
         return groundBlock.getLocation().add(0.5, 1, 0.5);
@@ -34,8 +36,7 @@ public class LocationFinder {
         // z cords
         int z = ThreadLocalRandom.current().nextInt(-settings.getWorldSettings(world.getEnvironment()).getMaxRadius(),
                 settings.getWorldSettings(world.getEnvironment()).getMaxRadius() + 1); // Set z cords by -5000 by 5000 blocks
-        // GroundStrategy groundStrategy = getStrategy(world);
-        return overworldStrategy.findGroundBlock(world, x, z).thenCompose(optionalBlock -> {
+        return getStrategy(world).findGroundBlock(world, x, z).thenCompose(optionalBlock -> {
             if (optionalBlock.isEmpty()) {
                 return findSafeLocation(world, attempt + 1);
             }
@@ -46,14 +47,13 @@ public class LocationFinder {
             return findSafeLocation(world, attempt + 1);
         });
     }
-    /*
     private GroundStrategy getStrategy(World world) {
         if (world.getEnvironment() == World.Environment.NETHER) {
             return netherStrategy;
+        } else if (world.getEnvironment() == World.Environment.THE_END){
+            return endStrategy;
         } else {
             return overworldStrategy;
         }
     }
-
-     */
 }
