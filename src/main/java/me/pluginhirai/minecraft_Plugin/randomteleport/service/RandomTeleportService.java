@@ -42,7 +42,7 @@ public class RandomTeleportService {
             warmupManager.clearPending(uuid);
             return;
         }
-        locationFinder.findSafeLocation(player.getWorld()).thenAccept(result -> {
+        locationFinder.findSafeLocation(world).thenAccept(result -> {
             if (result.isEmpty()) {
                 warmupManager.clearPending(uuid);
                 sendMessage(player, settings.getNoSafeLocationMessage());

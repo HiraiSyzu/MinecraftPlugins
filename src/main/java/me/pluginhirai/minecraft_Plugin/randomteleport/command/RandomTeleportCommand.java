@@ -1,5 +1,6 @@
     package me.pluginhirai.minecraft_Plugin.randomteleport.command;
     import me.pluginhirai.minecraft_Plugin.randomteleport.config.RtpSettings;
+    import me.pluginhirai.minecraft_Plugin.randomteleport.gui.RtpMenu;
     import me.pluginhirai.minecraft_Plugin.randomteleport.service.RandomTeleportService;
     import net.kyori.adventure.text.minimessage.MiniMessage;
     import org.bukkit.command.Command;
@@ -9,13 +10,13 @@
 
 
     public class RandomTeleportCommand implements CommandExecutor {
-        private final RandomTeleportService rtpService;
         private final RtpSettings settings;
+        private final RtpMenu rtpMenu;
 
         // Constructor
-        public RandomTeleportCommand(RandomTeleportService rtpService, RtpSettings settings) {
+        public RandomTeleportCommand(RtpSettings settings, RtpMenu rtpMenu) {
             this.settings = settings;
-            this.rtpService = rtpService;
+            this.rtpMenu = rtpMenu;
         }
         public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
             if (!(sender instanceof Player player)) {
@@ -25,7 +26,7 @@
                 player.sendMessage(MiniMessage.miniMessage().deserialize(settings.getNoPermissionMessage()));
                 return true;
             }
-            rtpService.requestTeleport(player, player.getWorld());
+            rtpMenu.open(player);
             return true;
         }
     }

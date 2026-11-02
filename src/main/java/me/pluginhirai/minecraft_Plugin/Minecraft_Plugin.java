@@ -9,12 +9,19 @@ import me.pluginhirai.minecraft_Plugin.listener.QuitListener;
 import me.pluginhirai.minecraft_Plugin.randomteleport.config.RtpSettings;
 import me.pluginhirai.minecraft_Plugin.randomteleport.cooldown.CooldownManager;
 import me.pluginhirai.minecraft_Plugin.randomteleport.effect.RandomTeleportEffects;
+import me.pluginhirai.minecraft_Plugin.randomteleport.gui.RtpMenu;
+import me.pluginhirai.minecraft_Plugin.randomteleport.guiconfig.RtpGuiSettings;
+import me.pluginhirai.minecraft_Plugin.randomteleport.listener.RtpMenuListener;
 import me.pluginhirai.minecraft_Plugin.randomteleport.listener.RtpMoveListener;
 import me.pluginhirai.minecraft_Plugin.randomteleport.listener.RtpQuitListener;
 import me.pluginhirai.minecraft_Plugin.randomteleport.location.*;
 import me.pluginhirai.minecraft_Plugin.randomteleport.service.RandomTeleportService;
 import me.pluginhirai.minecraft_Plugin.randomteleport.warmup.WarmupManager;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 
 public final class Minecraft_Plugin extends JavaPlugin {
@@ -37,6 +44,11 @@ public final class Minecraft_Plugin extends JavaPlugin {
         getCommand("damage").setExecutor(new DamageCommand());
         // Rtp Command
         saveDefaultConfig();
+        saveResource("gui.yml", false);
+        // Get gui.yml
+        File guiFile = new File(getDataFolder(), "gui.yml");
+        FileConfiguration guiConfig = YamlConfiguration.loadConfiguration(guiFile);
+
         RtpSettings settings = new RtpSettings(this);
         SafetyChecker safetyChecker = new SafetyChecker(settings);
         OverworldStrategy overworldStrategy = new OverworldStrategy(this);
@@ -50,13 +62,19 @@ public final class Minecraft_Plugin extends JavaPlugin {
                 settings,locationFinder,
                 warmupManager, cooldownManager,
                 rtpEffects);
-        RandomTeleportCommand rtpCommand = new RandomTeleportCommand(rtpService, settings);
+        RtpGuiSettings guiSettings = new RtpGuiSettings(guiConfig);
+        RtpMenu rtpMenu = new RtpMenu(guiSettings);
+        RandomTeleportCommand rtpCommand = new RandomTeleportCommand(settings, rtpMenu);
         getCommand("rtp").setExecutor(rtpCommand);
+        getServer().getPluginManager().registerEvents(new RtpMenuListener(guiSettings, rtpService), this);
         getServer().getPluginManager().registerEvents(new RtpMoveListener(warmupManager, rtpService), this);
         getServer().getPluginManager().registerEvents(new RtpQuitListener(warmupManager), this);
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new QuitListener(), this);
         getLogger().info("Plugin Enabled");
+        getLogger().info("gui.yml path: " + guiFile.getAbsolutePath());
+        getLogger().info("exists: " + guiFile.exists());
+        getLogger().info("keys: " + guiConfig.getKeys(true));
     }
 
     @Override

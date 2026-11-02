@@ -16,9 +16,12 @@ public class EndStrategy implements GroundStrategy{
 
     @Override
     public CompletableFuture<Optional<Block>> findGroundBlock(World world, int x, int z) {
-        return world.getChunkAtAsync(x >> 4, z >> 4).thenApplyAsync(ignored ->
-            Optional.of(world.getHighestBlockAt(x, z)),
-                    Bukkit.getScheduler().getMainThreadExecutor(plugin)
-        );
+        return world.getChunkAtAsync(x >> 4, z >> 4).thenApplyAsync(ignored -> {
+            Block block = world.getHighestBlockAt(x, z);
+            if (block.getType().isAir() || block.getY() <= world.getMinHeight()) {
+                return Optional.<Block>empty();
+            }
+            return Optional.of(block);
+        },Bukkit.getScheduler().getMainThreadExecutor(plugin));
     }
 }
