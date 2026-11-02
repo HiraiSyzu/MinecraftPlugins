@@ -1,5 +1,4 @@
-package me.pluginhirai.minecraft_Plugin.commands;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+package me.pluginhirai.minecraft_Plugin.command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;

@@ -17,4 +17,10 @@ unsafe-materials: # List of unsafe materials
   - LAVA
   - CACTUS
   - POWDER_SNOW
-
+# Sound effects
+sounds:
+  warmup-teleport-sound: minecraft:block.note_block.harp
+  successful-teleport-sound: minecraft:entity.enderman.teleport
+particles:
+  warmup-teleport-particle: minecraft:end_rod
+  successful-teleport-particle: minecraft:reverse_portal
