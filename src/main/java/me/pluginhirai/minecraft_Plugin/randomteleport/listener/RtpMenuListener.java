@@ -1,9 +1,8 @@
 package me.pluginhirai.minecraft_Plugin.randomteleport.listener;
-
-import me.pluginhirai.minecraft_Plugin.randomteleport.config.RtpSettings;
 import me.pluginhirai.minecraft_Plugin.randomteleport.gui.RtpMenuHolder;
 import me.pluginhirai.minecraft_Plugin.randomteleport.guiconfig.RtpGuiSettings;
 import me.pluginhirai.minecraft_Plugin.randomteleport.service.RandomTeleportService;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -43,13 +42,13 @@ public class RtpMenuListener implements Listener {
             worldName = guiSettings.getOverworldWorld();
         } else if (slot == guiSettings.getNetherSlot()) {
             if (!guiSettings.isNetherEnabled()) {
-                player.sendMessage(guiSettings.getWorldDisabledMessage());
+                player.sendMessage(MiniMessage.miniMessage().deserialize(guiSettings.getWorldDisabledMessage()));
                 return;
             }
             worldName = guiSettings.getNetherWorld  ();
         } else if (slot == guiSettings.getEndSlot()) {
             if (!guiSettings.isEndEnabled()) {
-                player.sendMessage(guiSettings.getWorldDisabledMessage());
+                player.sendMessage(MiniMessage.miniMessage().deserialize(guiSettings.getWorldDisabledMessage()));
                 return;
             }
             worldName = guiSettings.getEndWorld();
@@ -58,7 +57,7 @@ public class RtpMenuListener implements Listener {
         }
         World world = Bukkit.getWorld(worldName);
         if (world == null) {
-            player.sendMessage("That World isn't Accessible");
+            player.sendMessage("That World isn't Accessible"); // Hardcoded
             return;
         }
         player.closeInventory();

@@ -1,7 +1,6 @@
 rtp-menu:
   rows: 3
   title: "RtpMenu"
-
   filler-material: GRAY_STAINED_GLASS_PANE #Filler slot
   overworld:
     slot: 11
@@ -24,7 +23,7 @@ rtp-menu:
   end:
     slot: 15
     material: END_STONE
-    name: "Click to <#00FFFF>Teleport</#00FFFF> now!"
+    name: "<#00FFFF>The Nether RTP"
     lore:
       description-lore: "Teleport to a random location in the <#00FFFF> End Dimension"
       action-lore: "Click to <#00FFFF>Teleport</#00FFFF> now!"
@@ -32,7 +31,7 @@ rtp-menu:
     enabled: false
   disabled:
     material: BARRIER
-    name: "<red>Locked"
+    name: "<yellow>Locked"
     description-lore: "<#00FFFF>Not Available yet"
   messages:
-    world-disabled: "<red>This world is not available"
+    world-disabled: "<yellow>This world is not available"

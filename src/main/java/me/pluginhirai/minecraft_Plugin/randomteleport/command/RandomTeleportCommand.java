@@ -1,7 +1,6 @@
     package me.pluginhirai.minecraft_Plugin.randomteleport.command;
     import me.pluginhirai.minecraft_Plugin.randomteleport.config.RtpSettings;
     import me.pluginhirai.minecraft_Plugin.randomteleport.gui.RtpMenu;
-    import me.pluginhirai.minecraft_Plugin.randomteleport.service.RandomTeleportService;
     import net.kyori.adventure.text.minimessage.MiniMessage;
     import org.bukkit.command.Command;
     import org.bukkit.command.CommandExecutor;

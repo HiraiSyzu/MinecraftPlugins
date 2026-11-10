@@ -73,7 +73,6 @@ public class RandomTeleportService {
             return null;
         });
     }
-
     private void sendMessage(Player player, String message) {
         player.sendMessage(MiniMessage.miniMessage().deserialize(message));
     }

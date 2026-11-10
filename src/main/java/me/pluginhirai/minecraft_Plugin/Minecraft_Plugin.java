@@ -22,12 +22,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-
-
 public final class Minecraft_Plugin extends JavaPlugin {
 
     private WarmupManager warmupManager;
@@ -48,30 +42,10 @@ public final class Minecraft_Plugin extends JavaPlugin {
         getCommand("damage").setExecutor(new DamageCommand());
         // Rtp Command
         saveDefaultConfig();
-            saveResource("gui.yml", false);
+            saveResource("gui.yml", true);
         // Get gui.yml
         File guiFile = new File(getDataFolder(), "gui.yml");
         FileConfiguration guiConfig = YamlConfiguration.loadConfiguration(guiFile);
-
-        InputStream defaultStream = getResource("gui.yml");
-        if (defaultStream != null) {
-            YamlConfiguration defaults = YamlConfiguration.loadConfiguration(
-                    new InputStreamReader(defaultStream, StandardCharsets.UTF_8));
-            boolean changed = false;
-            for (String key : defaults.getKeys(true)) {
-                if (!defaults.isConfigurationSection(key) && !guiConfig.contains(key)) {
-                    guiConfig.set(key, defaults.get(key));
-                    changed = true;
-                }
-            }
-            if (changed) {
-                try {
-                    guiConfig.save(guiFile);
-                } catch (IOException e) {
-                    getLogger().warning("Could not update gui.yml " + e.getMessage());
-                }
-            }
-        }
 
         RtpSettings settings = new RtpSettings(this);
         SafetyChecker safetyChecker = new SafetyChecker(settings);
