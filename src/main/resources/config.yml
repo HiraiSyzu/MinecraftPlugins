@@ -1,13 +1,42 @@
+rtp-worlds:
+  NORMAL:
+    max-radius: 5000
+    min-y: 60
+    max-y: 320
+
+  NETHER:
+    max-radius: 3000
+    min-y: 60
+    max-y: 120
+
+  THE_END:
+    max-radius: 4000
+    min-y: 50
+    max-y: 120
+
 max-radius: 5000 # +-5000 blocks tp radius
+max-attempts: 50 # rtp logic attempts
 messages:
   success: "<#00FFFF>Successfully teleported to a random location!" #Success Message
   cooldown: "You must wait <#00FFFF>%remaining_time%s</#00FFFF> before using /rtp again!" #Cooldown-message rtp
-  no_safe_location: ""
+  no_safe_location: "<#00FFFF>Could not find a safe location</#00FFFF>" # If no found safeLocation
+  warmup-teleport-message: "<#00FFFF>Preparing random Teleport...</#00FFFF>"
+  countdown: "Teleporting in <#00FFFF>%countdown_time%s</#00FFFF>"
+  no-permission: "<red> You do not have permission."
+  canceled-movement-teleport-message: "<#00FFFF>Teleport canceled because you moved.</#00FFFF>"
+  pending-teleport-message: "<red> You already have a pending teleport!"
 cooldown-seconds: 20 # Rtp cooldown (Sec)
-UNSAFE_MATERIALS:
+countdown-seconds: 5 # Rtp countdown (Sec)
+unsafe-materials: # List of unsafe materials
   - WATER
   - AIR
   - LAVA
   - CACTUS
   - POWDER_SNOW
-
+# Sound effects
+sounds:
+  warmup-teleport-sound: minecraft:block.note_block.harp
+  successful-teleport-sound: minecraft:entity.enderman.teleport
+particles:
+  warmup-teleport-particle: minecraft:end_rod
+  successful-teleport-particle: minecraft:reverse_portal

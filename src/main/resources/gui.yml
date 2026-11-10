@@ -1,0 +1,37 @@
+rtp-menu:
+  rows: 3
+  title: "RtpMenu"
+  filler-material: GRAY_STAINED_GLASS_PANE #Filler slot
+  overworld:
+    slot: 11
+    material: GRASS_BLOCK
+    name: "<#00FFFF>The Overworld RTP"
+    lore:
+      description-lore: "Teleport to a random location in the <#00FFFF> Overworld"
+      action-lore: "Click to <#00FFFF>Teleport</#00FFFF> now!"
+    world: world
+    enabled: true
+  nether:
+    slot: 13
+    material: NETHERRACK
+    name: "<#00FFFF>The Nether RTP"
+    lore:
+      description-lore: "Teleport to a random location in the <#00FFFF> Nether Dimension"
+      action-lore: "Click to <#00FFFF>Teleport</#00FFFF> now!"
+    world: world_nether
+    enabled: true
+  end:
+    slot: 15
+    material: END_STONE
+    name: "<#00FFFF>The Nether RTP"
+    lore:
+      description-lore: "Teleport to a random location in the <#00FFFF> End Dimension"
+      action-lore: "Click to <#00FFFF>Teleport</#00FFFF> now!"
+    world: world_the_end
+    enabled: false
+  disabled:
+    material: BARRIER
+    name: "<yellow>Locked"
+    description-lore: "<#00FFFF>Not Available yet"
+  messages:
+    world-disabled: "<yellow>This world is not available"

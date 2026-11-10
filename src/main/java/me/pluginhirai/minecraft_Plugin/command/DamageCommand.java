@@ -1,4 +1,4 @@
-package me.pluginhirai.minecraft_Plugin.commands;
+package me.pluginhirai.minecraft_Plugin.command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
